@@ -1,13 +1,17 @@
-.allCats {
+.container {
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: space-between;
 }
 
-.clickCountDisplay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 10em;
+.bigDisplay {
+  width: 70%;
+}
+
+.listBox {
+  width: 25%;
+  background: teal;
 }
 
 .displayBox {
@@ -18,3 +22,9 @@
   padding: 2px;
 }
 
+
+li {
+  cursor: pointer;
+  font-size: 25px;
+  list-style-type: none;
+}

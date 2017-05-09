@@ -1,5 +1,6 @@
 
-const gallery = document.getElementsByClassName('allCats')[0];
+const listBox = document.getElementsByClassName('listBox')[0];
+const bigDisplay = document.getElementsByClassName('bigDisplay')[0];
 
 let cats = {
   Tigger: {
@@ -16,11 +17,49 @@ let cats = {
     name: 'Samantha',
     img: 'https://images-na.ssl-images-amazon.com/images/I/71RZzZI7LlL._CR204,0,1224,1224_UX256.jpg',
     count: 0
+  },
+  Carla: {
+    name: 'Carla',
+    img: 'https://cdn.neighbourly.co.nz/images/cache/message_image_thumbnail/message_images/58f563fc3955d5.38067264.jpeg?170410',
+    count: 0
+  },
+  Tad: {
+    name: 'Tad',
+    img: 'https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg',
+    count: 0
+  },
+  Jemima: {
+    name: 'Jemima',
+    img: 'https://images-na.ssl-images-amazon.com/images/I/71gvV3PrFGL._SL256_.jpg',
+    count: 0
   }
 }
 
-function makeItem(obj) { // constructs presenational elements
+const catList = document.createElement('ul');
 
+function addToList(obj) {
+  
+  const item = document.createElement('li');
+  const name = document.createTextNode(obj.name);
+  item.addEventListener('click', function() {
+    makeItem(obj)
+    }
+  );
+  item.appendChild(name);
+  catList.appendChild(item);
+  listBox.appendChild(catList);
+}
+
+for (var key in cats) {
+  addToList(cats[key]);
+}
+
+function showSelection(cat) {
+
+}
+
+function makeItem(obj) { // constructs presenational elements
+  bigDisplay.innerHTML = '';
   const box = document.createElement('div'); // container
   box.className = 'displayBox';
 
@@ -42,7 +81,7 @@ function makeItem(obj) { // constructs presenational elements
   box.append(nameHeading);
   box.appendChild(picture);
   box.append(countHeading);
-  gallery.appendChild(box);
+  bigDisplay.appendChild(box);
 
 }
 
@@ -51,6 +90,6 @@ function addCatClick(cat, counter) {
   counter.innerHTML = cats[cat].count;
 }
 
-for (var key in cats) {
-  makeItem(cats[key]);
-}
+// for (var key in cats) {
+//   makeItem(cats[key]);
+// }
