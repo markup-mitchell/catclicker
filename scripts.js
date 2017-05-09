@@ -42,7 +42,8 @@ function addToList(obj) {
   const item = document.createElement('li');
   const name = document.createTextNode(obj.name);
   item.addEventListener('click', function() {
-    makeItem(obj)
+    makeItem(obj);
+    item.style.color = 'blue'; // how to turn this off on next selection?
     }
   );
   item.appendChild(name);
@@ -55,7 +56,7 @@ for (var key in cats) {
 }
 
 function showSelection(cat) {
-
+    
 }
 
 function makeItem(obj) { // constructs presenational elements
