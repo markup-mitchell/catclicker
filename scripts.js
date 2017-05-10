@@ -34,7 +34,7 @@ let cats = {
     count: 0
   }
 }
-const placeholder = {name:'', img: 'http://www.iconsdb.com/icons/preview/black/question-mark-xxl.png'}
+const placeholder = {name:'', img: 'http://www.clipartbest.com/cliparts/jix/adA/jixadAxGT.png'}
 const catList = document.createElement('ul');
 
 function addToList(obj) {
@@ -42,7 +42,7 @@ function addToList(obj) {
   const name = document.createTextNode(obj.name);
   item.addEventListener('click', function() {
     makeItem(obj);
-    item.style.color = 'blue'; // how to turn this off on next selection?
+    item.classList.add('highlight');
     }
   );
   item.appendChild(name);
@@ -74,6 +74,7 @@ function makeItem(obj) { // constructs presenational elements
 
   const countHeading = document.createElement('h2');
   const count = document.createTextNode(obj.count);
+
   countHeading.append(count);
 
   box.append(nameHeading);
