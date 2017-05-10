@@ -1,20 +1,44 @@
-.allCats {
+.container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  /*background: pink;*/
 }
 
-.clickCountDisplay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 10em;
+.bigDisplay {
+  width: 50%;
+}
+
+.listBox {
+  width: 25%;
+  /*background: grey;*/
 }
 
 .displayBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: grey;
-  padding: 2px;
+  margin: 30px;
+  /*background: grey;*/
 }
 
+
+li {
+  cursor: pointer;
+  font-size: 25px;
+  list-style-type: none;
+}
+
+.highlight {
+  color:teal;
+}
+
+.catName {
+  padding: 10px;
+  font-size: 40px;
+}
+
+.counter {
+  padding: 20px;
+  font-size: 40px;
+}
