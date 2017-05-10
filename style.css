@@ -33,6 +33,12 @@ li {
   color:teal;
 }
 
-.list {
-  background: pink;
+.catName {
+  padding: 10px;
+  font-size: 40px;
+}
+
+.counter {
+  padding: 20px;
+  font-size: 40px;
 }

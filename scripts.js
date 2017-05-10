@@ -26,20 +26,23 @@ const model = {
     }
   ],
 
-  currentCat: { name: 'Ben',
-     img: 'https://images-na.ssl-images-amazon.com/images/I/71gvV3PrFGL._SL256_.jpg',
-      count: 0
-    },
-
+  currentCat: {
+    name:'', 
+    img: 'http://www.clipartbest.com/cliparts/jix/adA/jixadAxGT.png',
+    count: ''
+  },
+  
   giveData: function() {
     return this.catData;
   }
 }
 
+// ---------------------------------------------------
+
 const octopus = {
   init: function() {
-    selectionView.init;
-    displayView.init;
+    selectionView.init();
+    displayView.init(model.currentCat);
   },
 
   getData: function() {
@@ -48,21 +51,28 @@ const octopus = {
   
   fetchCat() {
     let nameClicked = this.innerHTML;
-    model.currentCat = model.catData.filter((cat) => cat.name === nameClicked); 
-    console.log(model.currentCat);
-    console.log(model.currentCat.name);
-
+    model.currentCat = model.catData.filter((cat) => cat.name === nameClicked)[0]; 
     displayView.render(model.currentCat);
+  },
+
+  countClick() {
+    let pictureClicked = this.id;
+    let catMatch = model.catData.filter((cat) => cat.name === pictureClicked)[0];
+    // ^^^^ this will cause problems if the name changes! use numeric ID instead?
+    // do I need this? can't I use currentCat?
+    catMatch.count ++;
+    displayView.render(catMatch);
   }
-
-
 }
+
+// ---------------------------------------------------
 
 
 const selectionView = { 
   
   init: function(){
-
+  this.render();
+  // should this be in use? move setup of other function in here?
  },
 
   render: function() {
@@ -79,8 +89,9 @@ const selectionView = {
 }
 
 const displayView = {
-  init: function() {
-
+  init: function(placeholder) {
+    this.render(placeholder);
+    // as above... what's the point of this?
   },
   render: function(obj) {
     const displayBox = document.getElementsByClassName('displayBox')[0];
@@ -93,6 +104,8 @@ const displayView = {
     // generate picture component
     let picture = document.createElement('img');
     picture.src = obj.img;
+    picture.id = obj.name;
+    picture.addEventListener('click', octopus.countClick);
 
     // generate click counter components and compose
     let clickBox = document.createElement('div');
@@ -111,4 +124,4 @@ const displayView = {
   }
 }
 
-selectionView.render();
+octopus.init();
