@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  background: pink;
+  /*background: pink;*/
 }
 
 .bigDisplay {
@@ -9,14 +9,14 @@
 
 .listBox {
   width: 25%;
-  background: grey;
+  /*background: grey;*/
 }
 
 .displayBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: grey;
+  /*background: grey;*/
 }
 
 

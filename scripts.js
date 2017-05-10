@@ -3,42 +3,41 @@ const listBox = document.getElementsByClassName('listBox')[0];
 const bigDisplay = document.getElementsByClassName('bigDisplay')[0];
 
 let cats = {
-  Tigger: {
-    name: 'Tigger',
+  Mark: {
+    name: 'Mark',
     img: 'https://images-na.ssl-images-amazon.com/images/I/71IA1C6JqXL._CR0,289,1154,1154_UX256.jpg',
     count: 0
   },
-  Harvey: {
-    name: 'Harvey',
+  Johnny: {
+    name: 'Johnny',
     img: 'https://indiewebcat.com/images/profile.jpg',
     count: 0
   },
-  Samantha: {
-    name: 'Samantha',
+  Camille: {
+    name: 'Camille',
     img: 'https://images-na.ssl-images-amazon.com/images/I/71RZzZI7LlL._CR204,0,1224,1224_UX256.jpg',
     count: 0
   },
-  Carla: {
-    name: 'Carla',
+  Nancy: {
+    name: 'Nancy',
     img: 'https://cdn.neighbourly.co.nz/images/cache/message_image_thumbnail/message_images/58f563fc3955d5.38067264.jpeg?170410',
     count: 0
   },
-  Tad: {
-    name: 'Tad',
+  Keir: {
+    name: 'Keir',
     img: 'https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg',
     count: 0
   },
-  Jemima: {
-    name: 'Jemima',
+  Ben: {
+    name: 'Ben',
     img: 'https://images-na.ssl-images-amazon.com/images/I/71gvV3PrFGL._SL256_.jpg',
     count: 0
   }
 }
-
+const placeholder = {name:'', img: 'http://www.iconsdb.com/icons/preview/black/question-mark-xxl.png'}
 const catList = document.createElement('ul');
 
 function addToList(obj) {
-  
   const item = document.createElement('li');
   const name = document.createTextNode(obj.name);
   item.addEventListener('click', function() {
@@ -51,12 +50,10 @@ function addToList(obj) {
   listBox.appendChild(catList);
 }
 
+makeItem(placeholder);
+
 for (var key in cats) {
   addToList(cats[key]);
-}
-
-function showSelection(cat) {
-    
 }
 
 function makeItem(obj) { // constructs presenational elements
