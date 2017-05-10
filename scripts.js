@@ -69,59 +69,47 @@ const octopus = {
 
 
 const selectionView = { 
-  
+   
   init: function(){
-  this.render();
-  // should this be in use? move setup of other function in here?
+    const list = document.getElementsByClassName('list')[0]; 
+    const objArray = octopus.getData();
  },
 
   render: function() {
-        const list = document.getElementsByClassName('list')[0]; 
-        octopus.getData().forEach(function(obj) {
-          let item = document.createElement('li');
-          let text = document.createTextNode(obj.name);
-          item.addEventListener('click', octopus.fetchCat);
-          item.appendChild(text);
-          list.appendChild(item);
-      }, this);
-
- }
+    objArray.forEach(function(obj) {
+      let item = document.createElement('li');
+      let text = document.createTextNode(obj.name);
+      item.addEventListener('click', octopus.fetchCat);
+      item.appendChild(text);
+      list.appendChild(item);
+    }, this); // what is `this` doing here?
+    this.render();
+  }
 }
 
 const displayView = {
   init: function(placeholder) {
-    this.render(placeholder);
-    // as above... what's the point of this?
-  },
-  render: function(obj) {
     const displayBox = document.getElementsByClassName('displayBox')[0];
+    const nameBox = document.getElementsByClassName('catName')[0];
+    const picture = document.getElementsByClassName('picture')[0];
+    const clickBox = document.getElementsByClassName('counter')[0];
+    this.render(placeholder);
+  },
+  
+  render: function(obj) {
+    
     // generate name components and compose:
-    let nameBox = document.createElement('div');
-    nameBox.classList.add('catName');
-    let name = document.createTextNode(obj.name);
-    nameBox.appendChild(name);
+    nameBox.innerHTML = (obj.name);
     
     // generate picture component
-    let picture = document.createElement('img');
     picture.src = obj.img;
     picture.id = obj.name;
     picture.addEventListener('click', octopus.countClick);
 
     // generate click counter components and compose
-    let clickBox = document.createElement('div');
-    clickBox.classList.add('counter');
-    let clicks = document.createTextNode(obj.count);
-    clickBox.appendChild(clicks);
-    
-    // clear any previous displayBox children:
-    while (displayBox.firstChild) {
-      displayBox.removeChild(displayBox.firstChild);
+    clickBox.innerHTML = obj.count;
     }
-    // put it all together in the html container
-    displayBox.appendChild(nameBox);
-    displayBox.appendChild(picture);
-    displayBox.appendChild(clickBox);    
-  }
 }
+
 
 octopus.init();
