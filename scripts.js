@@ -90,7 +90,3 @@ function addCatClick(cat, counter) {
   cats[cat].count ++;
   counter.innerHTML = cats[cat].count;
 }
-
-// for (var key in cats) {
-//   makeItem(cats[key]);
-// }
