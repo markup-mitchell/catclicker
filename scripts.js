@@ -24,22 +24,42 @@ const model = {
      img: 'https://images-na.ssl-images-amazon.com/images/I/71gvV3PrFGL._SL256_.jpg',
       count: 0
     }
-  ]
+  ],
+
+  // currentCat: this.catData[0],
+  giveData: function() {
+    return this.catData;
+  }
 }
 
 const octopus = {
   init: function() {
+    selectionView.init;
+    displayView.init;
+  },
 
+  getData: function() {
+    return model.giveData();
   }
+
+
 }
 
 
-const selectionView = {
- init: function(){
+const selectionView = { 
+  
+  init: function(){
 
  },
 
- render: function() {
+  render: function() {
+        const list = document.getElementsByClassName('list')[0]; 
+        octopus.getData().forEach(function(obj) {
+          let item = document.createElement('li');
+          let text = document.createTextNode(obj.name);
+          item.appendChild(text);
+          list.appendChild(item);
+      }, this);
 
  }
 }
@@ -49,7 +69,9 @@ const displayView = {
 
   },
   render: function() {
-
+    
 
   }
 }
+
+selectionView.render();
