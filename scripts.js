@@ -27,7 +27,7 @@ const model = {
   ],
 
   currentCat: {
-    name:'', 
+    name:'Pick A Cat!', 
     img: 'http://www.clipartbest.com/cliparts/jix/adA/jixadAxGT.png',
     count: ''
   },
