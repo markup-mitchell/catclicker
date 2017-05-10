@@ -26,7 +26,11 @@ const model = {
     }
   ],
 
-  // currentCat: this.catData[0],
+  currentCat: { name: 'Ben',
+     img: 'https://images-na.ssl-images-amazon.com/images/I/71gvV3PrFGL._SL256_.jpg',
+      count: 0
+    },
+
   giveData: function() {
     return this.catData;
   }
@@ -40,6 +44,15 @@ const octopus = {
 
   getData: function() {
     return model.giveData();
+  },
+  
+  fetchCat() {
+    let nameClicked = this.innerHTML;
+    model.currentCat = model.catData.filter((cat) => cat.name === nameClicked); 
+    console.log(model.currentCat);
+    console.log(model.currentCat.name);
+
+    displayView.render(model.currentCat);
   }
 
 
@@ -57,6 +70,7 @@ const selectionView = {
         octopus.getData().forEach(function(obj) {
           let item = document.createElement('li');
           let text = document.createTextNode(obj.name);
+          item.addEventListener('click', octopus.fetchCat);
           item.appendChild(text);
           list.appendChild(item);
       }, this);
@@ -68,9 +82,32 @@ const displayView = {
   init: function() {
 
   },
-  render: function() {
+  render: function(obj) {
+    const displayBox = document.getElementsByClassName('displayBox')[0];
+    // generate name components and compose:
+    let nameBox = document.createElement('div');
+    nameBox.classList.add('catName');
+    let name = document.createTextNode(obj.name);
+    nameBox.appendChild(name);
     
+    // generate picture component
+    let picture = document.createElement('img');
+    picture.src = obj.img;
 
+    // generate click counter components and compose
+    let clickBox = document.createElement('div');
+    clickBox.classList.add('counter');
+    let clicks = document.createTextNode(obj.count);
+    clickBox.appendChild(clicks);
+    
+    // clear any previous displayBox children:
+    while (displayBox.firstChild) {
+      displayBox.removeChild(displayBox.firstChild);
+    }
+    // put it all together in the html container
+    displayBox.appendChild(nameBox);
+    displayBox.appendChild(picture);
+    displayBox.appendChild(clickBox);    
   }
 }
 
