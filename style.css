@@ -42,3 +42,23 @@ li {
 img {
   box-shadow: 10px 10px 10px #AAA;
 }
+
+.button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-self: flex-end;
+  background: #CCC;
+  border: none;
+  padding: 5px;
+}
+
+.entry {
+  margin: 3px;
+}
+.formBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
