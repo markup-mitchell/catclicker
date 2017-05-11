@@ -71,45 +71,37 @@ const octopus = {
 const selectionView = { 
    
   init: function(){
-    const list = document.getElementsByClassName('list')[0]; 
-    const objArray = octopus.getData();
+    this.list = document.getElementsByClassName('list')[0]; 
+    this.render();
  },
 
   render: function() {
-    objArray.forEach(function(obj) {
+   octopus.getData().forEach(function(obj) {
       let item = document.createElement('li');
       let text = document.createTextNode(obj.name);
       item.addEventListener('click', octopus.fetchCat);
       item.appendChild(text);
-      list.appendChild(item);
-    }, this); // what is `this` doing here?
-    this.render();
+      this.list.appendChild(item);
+    }, this); // Q: what is `this` doing here? A: sets `this` value inside callback - ie selectionView
   }
 }
 
 const displayView = {
   init: function(placeholder) {
-    const displayBox = document.getElementsByClassName('displayBox')[0];
-    const nameBox = document.getElementsByClassName('catName')[0];
-    const picture = document.getElementsByClassName('picture')[0];
-    const clickBox = document.getElementsByClassName('counter')[0];
+    this.displayBox = document.getElementsByClassName('displayBox')[0];
+    this.nameBox = document.getElementsByClassName('catName')[0];
+    this.picture = document.getElementsByClassName('picture')[0];
+    this.clickBox = document.getElementsByClassName('counter')[0];
     this.render(placeholder);
   },
   
   render: function(obj) {
-    
-    // generate name components and compose:
-    nameBox.innerHTML = (obj.name);
-    
-    // generate picture component
-    picture.src = obj.img;
-    picture.id = obj.name;
-    picture.addEventListener('click', octopus.countClick);
-
-    // generate click counter components and compose
-    clickBox.innerHTML = obj.count;
+    this.nameBox.innerHTML = (obj.name);
+    this.picture.src = obj.img;
+    this.picture.id = obj.name;
+    this.picture.addEventListener('click', octopus.countClick); // closure required?
+    this.clickBox.innerHTML = obj.count;
     }
 }
-
 
 octopus.init();
