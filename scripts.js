@@ -117,6 +117,7 @@ const octopus = {
     model.nameInput='';
     model.urlInput='';
     model.countInput='';
+    octopus.toggleAdmin(); 
   }
 } 
  
