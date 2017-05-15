@@ -31,6 +31,8 @@ const model = {
     img: 'http://www.clipartbest.com/cliparts/jix/adA/jixadAxGT.png',
     count: ''
   },
+
+  adminPanel: false,  
   
   giveData: function() {
     return this.catData;
@@ -43,26 +45,39 @@ const octopus = {
   init: function() {
     selectionView.init();
     displayView.init(model.currentCat);
+    adminView.init();    
   },
 
   getData: function() {
     return model.giveData();
   },
   
-  fetchCat() {
+  fetchCat: function() {
     let nameClicked = this.innerHTML;
     model.currentCat = model.catData.filter((cat) => cat.name === nameClicked)[0]; 
     displayView.render(model.currentCat);
   },
 
-  countClick() {
+  countClick: function() {
     let pictureClicked = this.id;
     let catMatch = model.catData.filter((cat) => cat.name === pictureClicked)[0];
     // ^^^^ this will cause problems if the name changes! use numeric ID instead?
     // do I need this? can't I use currentCat?
     catMatch.count ++;
     displayView.render(catMatch);
+  },
+
+  adminCheck: function() {
+    return model.adminPanel;
+  },
+
+  toggleAdmin: function() {
+    model.adminPanel = model.adminPanel ? false : true;
+    adminView.render();
+    console.log('Admin area visible? ' + model.adminPanel);
   }
+
+
 }
 
 // ---------------------------------------------------
@@ -93,6 +108,7 @@ const displayView = {
     this.picture = document.getElementsByClassName('picture')[0];
     this.clickBox = document.getElementsByClassName('counter')[0];
     this.render(placeholder);
+    document.getElementsByClassName('adminButton')[0].addEventListener('click', octopus.toggleAdmin);
   },
   
   render: function(obj) {
@@ -101,7 +117,31 @@ const displayView = {
     this.picture.id = obj.name;
     this.picture.addEventListener('click', octopus.countClick); // closure required?
     this.clickBox.innerHTML = obj.count;
+  }
+}
+  
+  
+const adminView = {
+  init: function() {
+    this.saveButton = document.getElementsByClassName('save')[0];
+    this.cancelButton = document.getElementsByClassName('cancel')[0];
+    this.nameField = document.getElementsByClassName('editName')[0];
+    this.urlField = document.getElementsByClassName('editUrl')[0];
+    this.countField = document.getElementsByClassName('editCount')[0];
+    this.adminArea = document.getElementsByClassName('formBox')[0];
+    this.render();
+  }, 
+  
+  render: function() {
+    if (!octopus.adminCheck()) {
+      this.adminArea.style.visibility = 'hidden';
     }
+    else {
+      console.log("eventListeners to follow!");
+      this.adminArea.style.visibility = 'visible';
+  }
+  }
+  
 }
 
 octopus.init();

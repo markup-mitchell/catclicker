@@ -43,7 +43,8 @@ img {
   box-shadow: 10px 10px 10px #AAA;
 }
 
-.button {
+.adminButton {
+  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;

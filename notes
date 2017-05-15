@@ -1,0 +1,12 @@
+catclicker premium pro todo:
+
+- function to display admin area
+- function to hide admin area
+- hidden/visible value in model
+- update each field
+- rerender
+
+save function (updates objects from form, rerenders)
+cancel button (clears form, hides admin area)
+admin button (toggles admin area visibility)
+do admin as separate view with an init function to add event listeners to form fields
