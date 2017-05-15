@@ -33,7 +33,10 @@ const model = {
   },
 
   adminPanel: false,  
-  
+  nameInput: '',
+  urlInput: '',
+  countInput: '',
+
   giveData: function() {
     return this.catData;
   }
@@ -61,8 +64,6 @@ const octopus = {
   countClick: function() {
     let pictureClicked = this.id;
     let catMatch = model.catData.filter((cat) => cat.name === pictureClicked)[0];
-    // ^^^^ this will cause problems if the name changes! use numeric ID instead?
-    // do I need this? can't I use currentCat?
     catMatch.count ++;
     displayView.render(catMatch);
   },
@@ -71,14 +72,56 @@ const octopus = {
     return model.adminPanel;
   },
 
-  toggleAdmin: function() {
+  toggleAdmin : function() {
     model.adminPanel = model.adminPanel ? false : true;
     adminView.render();
-    console.log('Admin area visible? ' + model.adminPanel);
+    adminView.clear();
+  },
+
+  getInput: function(e) {
+    let thing = e.target.id;
+    let tempValue = e.target.value;
+    model[thing] = tempValue;
+    console.log(model.thing);
+  },
+
+  saveInput: function(e) {
+    let catIndex = model.catData.findIndex(function(cat) {
+      return cat.name === model.currentCat.name; }
+    );
+
+    if (model.nameInput === '') {
+      console.log("No name submitted - no change");
+    } 
+    else if (model.nameInput !== '') {
+      model.catData[catIndex].name = model.nameInput;
+    };
+
+    if (model.countInput === '') {
+      console.log("No count value submitted - no change")
+    }
+    else if (model.countInput !== '') {
+      model.catData[catIndex].count = model.countInput;
+    };
+
+    if (model.urlField === '') {
+      console.log("No URL submitted - no change")
+    }
+    else if (model.urlInput !== '') {
+      model.catData[catIndex].img = model.urlInput
+    };
+    model.currentCat = model.catData[catIndex]; // update current pick with new name
+    selectionView.render();
+    displayView.render(model.currentCat);
+    adminView.clear();
+    model.nameInput='';
+    model.urlInput='';
+    model.countInput='';
   }
+} 
+ 
 
 
-}
 
 // ---------------------------------------------------
 
@@ -91,7 +134,10 @@ const selectionView = {
  },
 
   render: function() {
-   octopus.getData().forEach(function(obj) {
+    while (this.list.hasChildNodes()) {
+    this.list.removeChild(this.list.lastChild);
+}
+    octopus.getData().forEach(function(obj) {
       let item = document.createElement('li');
       let text = document.createTextNode(obj.name);
       item.addEventListener('click', octopus.fetchCat);
@@ -108,7 +154,7 @@ const displayView = {
     this.picture = document.getElementsByClassName('picture')[0];
     this.clickBox = document.getElementsByClassName('counter')[0];
     this.render(placeholder);
-    document.getElementsByClassName('adminButton')[0].addEventListener('click', octopus.toggleAdmin);
+    document.getElementsByClassName('adminButton')[0].addEventListener('click', octopus.toggleAdmin );
   },
   
   render: function(obj) {
@@ -128,20 +174,29 @@ const adminView = {
     this.nameField = document.getElementsByClassName('editName')[0];
     this.urlField = document.getElementsByClassName('editUrl')[0];
     this.countField = document.getElementsByClassName('editCount')[0];
-    this.adminArea = document.getElementsByClassName('formBox')[0];
+    this.adminArea = document.getElementsByClassName('adminArea')[0];
     this.render();
   }, 
   
   render: function() {
     if (!octopus.adminCheck()) {
-      this.adminArea.style.visibility = 'hidden';
+      this.adminArea.style.display = 'none';
     }
     else {
       console.log("eventListeners to follow!");
-      this.adminArea.style.visibility = 'visible';
+      this.adminArea.style.display = 'block';
+      this.urlField.addEventListener('input', octopus.getInput);
+      this.nameField.addEventListener('input', octopus.getInput);
+      this.countField.addEventListener('input', octopus.getInput);
+      this.saveButton.addEventListener('click', octopus.saveInput);
+      this.cancelButton.addEventListener('click', octopus.toggleAdmin);
+    }
+  },
+
+  clear: function() {
+    document.getElementsByClassName('formBox')[0].reset();
   }
-  }
-  
+
 }
 
 octopus.init();
