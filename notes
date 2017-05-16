@@ -1,5 +1,12 @@
 catclicker premium pro todo:
 
+Refactor!
+
+sort out the display render issue - use closure for each cat display
+
+
+
+-------------------------------------------
 - function to display admin area
 - function to hide admin area
 - hidden/visible value in model
